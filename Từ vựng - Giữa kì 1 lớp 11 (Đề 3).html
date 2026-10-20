@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng: Giữa kì 1 – Đề 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12301f;
+    --ink-soft:#3f5548;
+    --paper:#eef3ec;
+    --card:#ffffff;
+    --amber:#c8871a;
+    --amber-deep:#a86e10;
+    --good:#1f7a4d;
+    --good-bg:#e3f3e8;
+    --bad:#b23b2e;
+    --bad-bg:#fbe7e3;
+    --line: rgba(18,48,31,0.16);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 64px;
+    line-height:1.5;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px);
+    background-size: 100% 120px;
+    opacity:0.35;
+    z-index:0;
+  }
+  .wrap{ position:relative; z-index:1; width:100%; max-width:620px; }
+  header.top{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:22px; gap:12px;
+  }
+  header.top h1{
+    font-family:var(--serif); font-size:21px; font-weight:600; margin:0; letter-spacing:-0.01em;
+  }
+  header.top .tag{ font-size:13px; color:var(--ink-soft); white-space:nowrap; }
+  .progress-track{
+    height:6px; background:rgba(18,48,31,0.12); border-radius:3px; overflow:hidden; margin-bottom:36px;
+  }
+  .progress-fill{ height:100%; background:var(--amber); width:0%; transition:width .35s ease; }
+
+  .card{ background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:32px 28px; }
+  .qmeta{ display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--ink-soft); margin-bottom:18px; }
+  .prompt-label{ font-size:13px; color:var(--ink-soft); margin-bottom:6px; }
+  .term{ font-family:var(--serif); font-size:26px; font-weight:700; line-height:1.25; margin:0 0 6px; }
+  .ipa{ font-size:15px; color:var(--amber-deep); margin:0 0 26px; font-weight:500; }
+
+  .choices{ display:flex; flex-direction:column; gap:10px; }
+  .choice-btn{
+    text-align:left; background:var(--card); border:1.5px solid var(--ink); border-radius:5px;
+    padding:13px 16px; font-family:var(--sans); font-size:15px; color:var(--ink); cursor:pointer;
+    transition:background .15s ease;
+  }
+  .choice-btn:hover:not(:disabled){ background:#f1ede1; }
+  .choice-btn:disabled{ cursor:default; }
+  .choice-btn.correct{ background:var(--good-bg); border-color:var(--good); color:var(--good); font-weight:600; }
+  .choice-btn.wrong{ background:var(--bad-bg); border-color:var(--bad); color:var(--bad); font-weight:600; }
+
+  .feedback{ margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); display:none; }
+  .feedback.show{ display:block; }
+  .fb-verdict{ font-weight:700; font-size:15px; margin-bottom:8px; }
+  .fb-verdict.good{ color:var(--good); }
+  .fb-verdict.bad{ color:var(--bad); }
+  .fb-meaning{ font-size:15px; }
+  .fb-example{ font-size:14px; color:var(--ink-soft); font-style:italic; margin-top:6px; }
+  .next-btn{
+    margin-top:20px; width:100%; font-family:var(--sans); font-weight:700; font-size:15px;
+    padding:13px; background:var(--amber); color:#2a1c02; border:none; border-radius:5px; cursor:pointer;
+  }
+  .next-btn:hover{ background:var(--amber-deep); color:#fff; }
+
+  .results h2{ font-family:var(--serif); font-size:28px; margin:0 0 6px; }
+  .score-big{ font-family:var(--serif); font-size:56px; font-weight:700; color:var(--amber-deep); margin:14px 0 4px; }
+  .score-sub{ color:var(--ink-soft); font-size:14px; margin-bottom:26px; }
+  .review-list{ list-style:none; padding:0; margin:0 0 24px; display:flex; flex-direction:column; gap:10px; }
+  .review-list li{ border-left:3px solid var(--bad); padding:8px 14px; background:var(--bad-bg); border-radius:0 4px 4px 0; font-size:14px; }
+  .review-list li b{ font-family:var(--serif); font-size:15px; }
+  .no-wrong{ font-size:14px; color:var(--good); margin-bottom:24px; }
+  .restart-btn{
+    width:100%; font-family:var(--sans); font-weight:700; font-size:15px; padding:14px;
+    background:var(--ink); color:var(--paper); border:none; border-radius:5px; cursor:pointer;
+  }
+
+  @media (max-width:480px){
+    .card{ padding:24px 18px; }
+    .term{ font-size:22px; }
+    .score-big{ font-size:44px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Từ vựng: Giữa kì 1 – Đề 3</h1>
+    <span class="tag" id="counterTag">1 / 60</span>
+  </header>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="card" id="quizCard"></div>
+</div>
+
+<script>
+const VOCAB = [
+{"term": "an innovative way to V", "ipa": "/ən ˈɪnəveɪtɪv weɪ tuː/", "meaning": "cách sáng tạo để làm gì", "example": "Scientists found an innovative way to recycle plastic."},
+{"term": "cope with", "ipa": "/koʊp wɪð/", "meaning": "đối phó, xoay xở với", "example": "Many cities struggle to cope with heavy traffic."},
+{"term": "increase biodiversity", "ipa": "/ɪnˈkriːs ˌbaɪoʊdaɪˈvɜːrsəti/", "meaning": "tăng đa dạng sinh học", "example": "Urban parks help increase biodiversity in big cities."},
+{"term": "sustainable city / development", "ipa": "/səˈsteɪnəbl ˈsɪti / dɪˈveləpmənt/", "meaning": "thành phố / sự phát triển bền vững", "example": "A sustainable city uses clean energy and saves water."},
+{"term": "draft an advertisement", "ipa": "/dræft ən ədˈvɜːrtɪsmənt/", "meaning": "soạn thảo một bản quảng cáo", "example": "She drafted an advertisement for the school club."},
+{"term": "qualifications and experience", "ipa": "/ˌkwɑːlɪfɪˈkeɪʃnz ənd ɪkˈspɪriəns/", "meaning": "bằng cấp và kinh nghiệm", "example": "The job requires good qualifications and experience."},
+{"term": "clip on the waistband", "ipa": "/klɪp ɑːn ðə ˈweɪstbænd/", "meaning": "cài dây đai ở eo", "example": "Clip the strap on the waistband before you start."},
+{"term": "inflate the life jacket", "ipa": "/ɪnˈfleɪt ðə ˈlaɪf dʒækɪt/", "meaning": "bơm phồng áo phao", "example": "Pull the cord to inflate the life jacket."},
+{"term": "evacuation slide", "ipa": "/ɪˌvækjuˈeɪʃn slaɪd/", "meaning": "cầu trượt thoát hiểm", "example": "Passengers left the plane by the evacuation slide."},
+{"term": "life raft", "ipa": "/laɪf ræft/", "meaning": "bè cứu sinh", "example": "The crew launched the life raft into the sea."},
+{"term": "emergency exit", "ipa": "/ɪˈmɜːrdʒənsi ˈeksɪt/", "meaning": "cửa thoát hiểm", "example": "Please find the nearest emergency exit."},
+{"term": "crew", "ipa": "/kruː/", "meaning": "phi hành đoàn", "example": "The crew welcomed the passengers on board."},
+{"term": "safety leaflet", "ipa": "/ˈseɪfti ˈliːflət/", "meaning": "tờ hướng dẫn an toàn", "example": "Read the safety leaflet in your seat pocket."},
+{"term": "adjust the headband to fit yourself", "ipa": "/əˈdʒʌst ðə ˈhedbænd tuː fɪt jɔːrˈself/", "meaning": "chỉnh dây đeo đầu cho vừa", "example": "Adjust the headband to fit yourself before you put on the mask."},
+{"term": "unplug from daily stresses and strains", "ipa": "/ʌnˈplʌɡ frʌm ˈdeɪli ˈstresɪz ənd streɪnz/", "meaning": "thoát khỏi căng thẳng và áp lực hằng ngày", "example": "A walk in the park helps me unplug from daily stresses and strains."},
+{"term": "stimulate the release of endorphins", "ipa": "/ˈstɪmjuleɪt ðə rɪˈliːs əv enˈdɔːrfɪnz/", "meaning": "kích thích tiết endorphin", "example": "Exercise stimulates the release of endorphins, so you feel happier."},
+{"term": "immune system", "ipa": "/ɪˈmjuːn ˈsɪstəm/", "meaning": "hệ miễn dịch", "example": "Sleeping well helps strengthen your immune system."},
+{"term": "harmful bacteria and viruses", "ipa": "/ˈhɑːrmfl bækˈtɪriə ənd ˈvaɪrəsɪz/", "meaning": "vi khuẩn và virus có hại", "example": "Washing hands removes harmful bacteria and viruses."},
+{"term": "the implementation of", "ipa": "/ði ˌɪmplɪmenˈteɪʃn əv/", "meaning": "sự triển khai của", "example": "The implementation of the new rules reduced accidents."},
+{"term": "have a lasting effect on", "ipa": "/hæv ə ˈlæstɪŋ ɪˈfekt ɑːn/", "meaning": "có tác động lâu dài lên", "example": "Good teachers have a lasting effect on their students."},
+{"term": "pedestrian routes / walkways", "ipa": "/pəˈdestriən ruːts / ˈwɔːkweɪz/", "meaning": "lối đi bộ", "example": "The city built safe pedestrian routes near schools."},
+{"term": "city planners", "ipa": "/ˈsɪti ˈplænərz/", "meaning": "nhà quy hoạch đô thị", "example": "City planners are designing more green spaces."},
+{"term": "deploy new technology", "ipa": "/dɪˈplɔɪ nuː tekˈnɑːlədʒi/", "meaning": "triển khai công nghệ mới", "example": "The company will deploy new technology in all its stores."},
+{"term": "power LED lighting", "ipa": "/ˈpaʊər ˌel iː ˈdiː ˈlaɪtɪŋ/", "meaning": "cấp điện cho đèn LED", "example": "Solar panels power LED lighting along the street."},
+{"term": "kinetic energy", "ipa": "/kɪˈnetɪk ˈenərdʒi/", "meaning": "động năng", "example": "Moving cars produce kinetic energy."},
+{"term": "the crisis of overpopulation", "ipa": "/ðə ˈkraɪsɪs əv ˌoʊvərˌpɑːpjuˈleɪʃn/", "meaning": "khủng hoảng dân số", "example": "Big cities face the crisis of overpopulation."},
+{"term": "a dearth of resources", "ipa": "/ə dɜːrθ əv ˈriːsɔːrsɪz/", "meaning": "sự thiếu hụt tài nguyên (= scarcity)", "example": "There is a dearth of clean water in some regions."},
+{"term": "a coexistent society", "ipa": "/ə ˌkoʊɪɡˈzɪstənt səˈsaɪəti/", "meaning": "xã hội cùng tồn tại", "example": "The city aims to build a coexistent society where all groups live together peacefully."},
+{"term": "require large investments", "ipa": "/rɪˈkwaɪər lɑːrdʒ ɪnˈvestmənts/", "meaning": "đòi hỏi vốn đầu tư lớn", "example": "Building smart cities requires large investments."},
+{"term": "Nonetheless, ...", "ipa": "/ˌnʌnðəˈles/", "meaning": "tuy nhiên (= However)", "example": "The test was difficult. Nonetheless, most students passed."},
+{"term": "conscious implementation", "ipa": "/ˈkɑːnʃəs ˌɪmplɪmenˈteɪʃn/", "meaning": "triển khai có ý thức, có cân nhắc", "example": "The plan needs conscious implementation by everyone."},
+{"term": "optimum usage of space and resources", "ipa": "/ˈɑːptɪməm ˈjuːsɪdʒ əv speɪs ənd ˈriːsɔːrsɪz/", "meaning": "sử dụng tối ưu không gian và tài nguyên", "example": "Smart design allows optimum usage of space and resources."},
+{"term": "along with", "ipa": "/əˈlɔːŋ wɪð/", "meaning": "cùng với", "example": "She sent a letter along with a small gift."},
+{"term": "optimum distribution of benefits", "ipa": "/ˈɑːptɪməm ˌdɪstrɪˈbjuːʃn əv ˈbenɪfɪts/", "meaning": "phân phối lợi ích tối ưu", "example": "The plan ensures optimum distribution of benefits among citizens."},
+{"term": "increase connectivity", "ipa": "/ɪnˈkriːs ˌkɑːnekˈtɪvəti/", "meaning": "tăng tính kết nối", "example": "New bus lines increase connectivity between districts."},
+{"term": "the administration and population", "ipa": "/ði ədˌmɪnɪˈstreɪʃn ənd ˌpɑːpjuˈleɪʃn/", "meaning": "chính quyền và người dân", "example": "Success depends on cooperation between the administration and population."},
+{"term": "public properties", "ipa": "/ˈpʌblɪk ˈprɑːpərtiz/", "meaning": "tài sản công", "example": "Citizens must take care of public properties."},
+{"term": "tackle redundancies of the present system", "ipa": "/ˈtækl rɪˈdʌndənsiz əv ðə ˈpreznt ˈsɪstəm/", "meaning": "xử lý những điểm thừa của hệ thống hiện tại", "example": "The new plan will tackle redundancies of the present system."},
+{"term": "present-day demands", "ipa": "/ˈpreznt deɪ dɪˈmændz/", "meaning": "nhu cầu thời nay", "example": "Schools must meet present-day demands of the job market."},
+{"term": "adapt to", "ipa": "/əˈdæpt tuː/", "meaning": "thích nghi với", "example": "Cities need to adapt to climate change."},
+{"term": "environment-friendly", "ipa": "/ɪnˈvaɪrənmənt ˈfrendli/", "meaning": "thân thiện với môi trường", "example": "Electric buses are an environment-friendly choice."},
+{"term": "keep track of", "ipa": "/kiːp træk əv/", "meaning": "theo dõi", "example": "Sensors help the city keep track of air quality."},
+{"term": "environmental and health-related factors", "ipa": "/ɪnˌvaɪrənˈmentl ənd helθ rɪˈleɪtɪd ˈfæktərz/", "meaning": "các yếu tố môi trường và sức khoẻ", "example": "Planners consider environmental and health-related factors."},
+{"term": "the maintenance of", "ipa": "/ðə ˈmeɪntənəns əv/", "meaning": "việc duy trì, bảo trì", "example": "The maintenance of roads costs a lot of money."},
+{"term": "review and amend the system", "ipa": "/rɪˈvjuː ənd əˈmend ðə ˈsɪstəm/", "meaning": "rà soát và điều chỉnh hệ thống", "example": "Officials review and amend the system every year."},
+{"term": "conscious work-force", "ipa": "/ˈkɑːnʃəs ˈwɜːrk fɔːrs/", "meaning": "đội ngũ nhân lực có ý thức", "example": "A conscious work-force is important for a smart city."},
+{"term": "reach a wholesome stage", "ipa": "/riːtʃ ə ˈhoʊlsəm steɪdʒ/", "meaning": "đạt giai đoạn hoàn thiện, lành mạnh", "example": "The city hopes to reach a wholesome stage of development."},
+{"term": "stand up to the needs of", "ipa": "/stænd ʌp tuː ðə niːdz əv/", "meaning": "đáp ứng được nhu cầu của", "example": "The new system can stand up to the needs of a growing population."},
+{"term": "maximize the usage of", "ipa": "/ˈmæksɪmaɪz ðə ˈjuːsɪdʒ əv/", "meaning": "tối đa hoá việc sử dụng", "example": "Smart cities maximize the usage of renewable energy."},
+{"term": "the purpose of", "ipa": "/ðə ˈpɜːrpəs əv/", "meaning": "mục đích của", "example": "The purpose of this project is to protect the environment."},
+{"term": "alleviate the anxieties of", "ipa": "/əˈliːvieɪt ði æŋˈzaɪətiz əv/", "meaning": "làm giảm bớt lo âu của", "example": "Clear information can alleviate the anxieties of residents."},
+{"term": "thrive", "ipa": "/θraɪv/", "meaning": "phát triển mạnh (= prosper)", "example": "Small businesses thrive in this lively neighborhood."},
+{"term": "invasion of privacy", "ipa": "/ɪnˈveɪʒn əv ˈpraɪvəsi/", "meaning": "xâm phạm quyền riêng tư", "example": "Some people think cameras are an invasion of privacy."},
+{"term": "deter crime", "ipa": "/dɪˈtɜːr kraɪm/", "meaning": "ngăn chặn tội phạm", "example": "Street lights help deter crime at night."},
+{"term": "rush hour", "ipa": "/rʌʃ ˈaʊər/", "meaning": "giờ cao điểm", "example": "The roads are crowded during rush hour."},
+{"term": "decades-old infrastructure", "ipa": "/ˈdekeɪdz oʊld ˈɪnfrəstrʌktʃər/", "meaning": "cơ sở hạ tầng hàng chục năm tuổi", "example": "The city is replacing its decades-old infrastructure."},
+{"term": "take advantage of", "ipa": "/teɪk ədˈvæntɪdʒ əv/", "meaning": "tận dụng", "example": "Students should take advantage of free online courses."},
+{"term": "smart sensors", "ipa": "/smɑːrt ˈsensərz/", "meaning": "cảm biến thông minh", "example": "Smart sensors measure traffic and air quality."},
+{"term": "analyze city design through sensor data", "ipa": "/ˈænəlaɪz ˈsɪti dɪˈzaɪn θruː ˈsensər ˈdeɪtə/", "meaning": "phân tích thiết kế đô thị qua dữ liệu cảm biến", "example": "Engineers analyze city design through sensor data."},
+{"term": "physically active", "ipa": "/ˈfɪzɪkli ˈæktɪv/", "meaning": "năng động về thể chất", "example": "Walkable cities keep people physically active."}
+];
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+let order = [];
+let current = 0;
+let score = 0;
+let wrongItems = [];
+let answered = false;
+
+function startQuiz(){
+  order = shuffle(VOCAB);
+  current = 0;
+  score = 0;
+  wrongItems = [];
+  renderQuestion();
+}
+
+function buildChoices(correctItem){
+  const pool = VOCAB.filter(v=>v.meaning!==correctItem.meaning);
+  const distractors = shuffle(pool).slice(0,3).map(v=>v.meaning);
+  return shuffle([correctItem.meaning, ...distractors]);
+}
+
+function renderQuestion(){
+  answered = false;
+  const total = order.length;
+  document.getElementById('counterTag').textContent = (current+1)+" / "+total;
+  document.getElementById('progressFill').style.width = ((current)/total*100)+"%";
+
+  const item = order[current];
+  const card = document.getElementById('quizCard');
+
+  let bodyHtml = `
+    <div class="qmeta"><span>Câu ${current+1} / ${total}</span></div>
+    <div class="prompt-label">Cụm từ này có nghĩa là gì?</div>
+    <div class="term">${item.term}</div>
+    <div class="ipa">${item.ipa}</div>
+    <div class="choices" id="choicesBox">
+  `;
+  const choices = buildChoices(item);
+  choices.forEach(c=>{
+    bodyHtml += `<button class="choice-btn" data-answer="${encodeURIComponent(c)}" onclick="handleChoice(this)">${c}</button>`;
+  });
+  bodyHtml += `</div><div class="feedback" id="feedbackBox"></div>`;
+
+  card.innerHTML = bodyHtml;
+}
+
+function showFeedback(isCorrect, item){
+  const fb = document.getElementById('feedbackBox');
+  fb.classList.add('show');
+  fb.innerHTML = `
+    <div class="fb-verdict ${isCorrect?'good':'bad'}">${isCorrect ? 'Chính xác!' : 'Chưa đúng.'}</div>
+    <div class="fb-meaning">Nghĩa đúng: <strong>${item.meaning}</strong></div>
+    <div class="fb-example">Ví dụ: ${item.example}</div>
+  `;
+  const btn = document.createElement('button');
+  btn.className = 'next-btn';
+  btn.textContent = (current === order.length-1) ? 'Xem kết quả' : 'Câu tiếp theo';
+  btn.onclick = goNext;
+  fb.appendChild(btn);
+}
+
+function handleChoice(btn){
+  if(answered) return;
+  answered = true;
+  const item = order[current];
+  const chosen = decodeURIComponent(btn.getAttribute('data-answer'));
+  const isCorrect = chosen === item.meaning;
+
+  document.querySelectorAll('.choice-btn').forEach(b=>{
+    b.disabled = true;
+    const val = decodeURIComponent(b.getAttribute('data-answer'));
+    if(val === item.meaning) b.classList.add('correct');
+    else if(b===btn) b.classList.add('wrong');
+  });
+
+  if(isCorrect) score++;
+  else wrongItems.push(item);
+
+  showFeedback(isCorrect, item);
+}
+
+function goNext(){
+  if(current === order.length-1){
+    renderResults();
+  } else {
+    current++;
+    renderQuestion();
+  }
+}
+
+function renderResults(){
+  document.getElementById('progressFill').style.width = "100%";
+  document.getElementById('counterTag').textContent = order.length+" / "+order.length;
+  const total = order.length;
+  const pct = Math.round(score/total*100);
+
+  let html = `
+    <div class="results">
+      <h2>Hoàn thành!</h2>
+      <div class="score-big">${score}/${total}</div>
+      <div class="score-sub">Bạn đã trả lời đúng ${pct}% số câu hỏi.</div>
+  `;
+
+  if(wrongItems.length === 0){
+    html += `<div class="no-wrong">Xuất sắc! Không có câu nào sai.</div>`;
+  } else {
+    html += `<ul class="review-list">`;
+    wrongItems.forEach(item=>{
+      html += `<li><b>${item.term}</b> — ${item.meaning}</li>`;
+    });
+    html += `</ul>`;
+  }
+
+  html += `<button class="restart-btn" onclick="startQuiz()">Làm lại từ đầu</button></div>`;
+
+  document.getElementById('quizCard').innerHTML = html;
+}
+
+startQuiz();
+</script>
+</body>
+</html>
